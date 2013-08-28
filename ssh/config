@@ -4,9 +4,3 @@ ControlMaster auto
 ControlPath ~/.ssh/%r@%h:%p
 ControlPersist 1
 
-
-Host aries-dpu-64
-User root
-
-Host bryan-dev
-User bgoldston
