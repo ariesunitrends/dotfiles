@@ -1,0 +1,68 @@
+:set nu				" display line numbers
+:set tabstop=4		" <TAB> expansion size
+:set shiftwidth=4	" autoindent size
+:set softtabstop=4	" n*<TAB> alignment size
+:colo default		" uniform color palette
+:set laststatus=2	" display status line
+:set statusline=%#Normal#%F\ %#Constant#%m%r%h%w%#Normal#\ %=%l,%-14.(%c%V%)\ %P\ \ %L
+
+" Forces file encodings to utf-8
+:set enc=utf-8
+:set fenc=utf-8
+
+" Sets autoindent behavior
+:autocmd FileType c,cpp,java set cindent
+:set autoindent
+"au FileType xml setlocal equalprg='XMLLINT_INDENT=\"	\"\ xmllint\ --format\ --recover\ -\ 2>/dev/null'
+
+" Sets columns at 80 (console) and 104 (1/2 width of 1080p)
+:set colorcolumn=80,104
+:highlight ColorColumn ctermbg=8 guibg=8
+
+" Auto folds functions, use 'za' to toggle fold
+:set foldmethod=syntax
+:set foldnestmax=1
+
+" Sets diff environment
+:set diffopt=filler,context:50
+
+" Creates a vertical window with the differences from the local copy
+function! s:DiffWithSaved()
+	let filetype=&ft
+	diffthis
+	vnew | r # | normal! 1Gdd
+	diffthis
+	exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
+endfunction
+com! DiffSaved call s:DiffWithSaved()
+
+" Creates a vertical window with the differences from CVS
+function! s:DiffWithCVSCheckedOut()
+	let filetype=&ft
+	diffthis
+	vnew | r !cvs up -pr BASE #
+	1,6d
+	diffthis
+	exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
+endfunction
+com! DiffCVS call s:DiffWithCVSCheckedOut()
+
+" Imports cscope module
+if has ("cscope")
+
+	set cscopetag
+	set	csto=0
+
+"	if filereadable("cscope.out")
+"		cs add cscope.out
+"	elseif $CSCOPE_DB != ""
+"		cs add $CSCOPE_DB
+"	endif
+
+	set cscopeverbose
+
+endif
+
+:autocmd BufRead,BufNewFile *.cmake,CMakeLists.txt,*.cmake.in runtime! indent/cmake.vim 
+:autocmd BufRead,BufNewFile *.cmake,CMakeLists.txt,*.cmake.in setf cmake
+:autocmd BufRead,BufNewFile *.ctest,*.ctest.in setf cmake

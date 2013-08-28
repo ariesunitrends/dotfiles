@@ -1,0 +1,39 @@
+# .bashrc
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+	. /etc/bashrc
+fi
+
+# User specific aliases and functions
+
+function prompt_cvs()
+{
+	if [ -f ./CVS/Entries ]
+	then
+		printf "=[CVS %s]" `awk -F/ '{ gsub(/^T/, "", $6); if ( $6 != "" ) tag=$6  } END { if ( tag != "" ) print tag; else print "HEAD" }' ./CVS/Entries | sort | uniq`
+	fi
+}
+
+function prompt_git()
+{
+	git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/=[GIT \1]/'
+}
+
+function prompt_vcs()
+{
+	prompt_cvs && prompt_git
+}
+
+export EDITOR=vim
+export VISUAL='gvim -f'
+
+export CVSROOT=:ext:cvsserver.unitrends.com:/home/controlled-source/cvsroot
+
+#export PS1="[\u@\h \w]\\$ "
+export PS1='┌─[\u@\h:\w]$(prompt_vcs)\n└──\\$ '
+
+if [ -f ~/.bash_aliases ]; then
+	. ~/.bash_aliases
+fi
+
