@@ -6,6 +6,6 @@ then
 fi
 
 ln -sf $PWD/bash/bashrc ~/.bashrc
-ln -sf $PWD/vim/vimrc ~/.bashrc
+ln -sf $PWD/vim/vimrc ~/.vimrc
 ln -sf $PWD/ssh/config ~/.ssh/config
 
