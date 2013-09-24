@@ -26,6 +26,9 @@
 " Sets diff environment
 :set diffopt=filler,context:50
 
+" mappings
+nmap <Leader><Space> :set hlsearch!<CR>
+
 " Creates a vertical window with the differences from the local copy
 function! s:DiffWithSaved()
 	let filetype=&ft
@@ -66,3 +69,4 @@ endif
 :autocmd BufRead,BufNewFile *.cmake,CMakeLists.txt,*.cmake.in runtime! indent/cmake.vim 
 :autocmd BufRead,BufNewFile *.cmake,CMakeLists.txt,*.cmake.in setf cmake
 :autocmd BufRead,BufNewFile *.ctest,*.ctest.in setf cmake
+
