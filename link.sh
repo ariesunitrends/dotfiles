@@ -1,11 +1,13 @@
-#!/bin/sh
+#!/bin/sh -e
 
 if [ $# != 0 ]
 then
 	exit 1
 fi
 
-ln -sf $PWD/bash/bashrc ~/.bashrc
-ln -sf $PWD/vim/vimrc ~/.vimrc
-ln -sf $PWD/ssh/config ~/.ssh/config
+BIN=$(dirname $(readlink -f $0))
+
+ln -sf $BIN/bash/bashrc ~/.bashrc
+ln -sf $BIN/vim/vimrc ~/.vimrc
+ln -sf $BIN/ssh/config ~/.ssh/config
 

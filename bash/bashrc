@@ -26,7 +26,6 @@ function prompt_vcs()
 }
 
 export EDITOR=vim
-export VISUAL='gvim -f'
 
 export CVSROOT=:ext:cvsserver.unitrends.com:/home/controlled-source/cvsroot
 
