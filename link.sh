@@ -8,6 +8,7 @@ fi
 BIN=$(dirname $(readlink -f $0))
 
 ln -sf $BIN/bash/bashrc ~/.bashrc
+ln -sf $BIN/bash/bash_aliases ~/.bash_aliases
 ln -sf $BIN/vim/vimrc ~/.vimrc
 ln -sf $BIN/ssh/config ~/.ssh/config
 chmod 0600 ~/.ssh/config
