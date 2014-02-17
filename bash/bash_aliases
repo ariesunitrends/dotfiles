@@ -1,2 +1,2 @@
 alias go="gnome-open"
-alias ps="ps -AH --headers -o pid,pgid,%cpu,%mem,start,etime,cmd"
+alias ps="ps -AH --headers -o pid,pgid,user,%cpu,%mem,start,etime,cmd"
