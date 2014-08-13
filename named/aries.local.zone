@@ -1,0 +1,16 @@
+$TTL 86400
+aries.local.   IN  SOA     aries-desk.aries.local. root.aries.local. (
+        2013042201  ;Serial
+        3600        ;Refresh
+        1800        ;Retry
+        604800      ;Expire
+        86400       ;Minimum TTL
+)
+; Specify our two nameservers
+@		IN	NS		aries-desk.aries.local.
+; Resolve nameserver hostnames to IP, replace with your two droplet IP addresses.
+aries-desk	IN	A		192.168.117.199
+
+; Define hostname -> IP pairs which you wish to resolve
+www		IN	A		192.168.117.199
+
